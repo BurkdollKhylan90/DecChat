@@ -6,7 +6,10 @@ contract DecentralizedChat {
     mapping(address => bool) public registeredAddresses;
 
     event MessageSent(address indexed sender, string nickname, string message);
-
+modifier onlyRegistered() {
+        require(registeredAddresses[msg.sender], "Sender is not registered");
+        _;
+    }
 
 
    }
