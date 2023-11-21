@@ -17,6 +17,11 @@ function register(string memory _nickname) external {
         nicknames[msg.sender] = _nickname;
         registeredAddresses[msg.sender] = true;
     }
+function sendMessage(address _recipient, string memory _message) external onlyRegistered {
+        require(registeredAddresses[_recipient], "Recipient is not registered");
 
+        string memory senderNickname = nicknames[msg.sender];
+        emit MessageSent(msg.sender, senderNickname, _message);
+    }
    }
 
